@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}
+Stencil Application | Helpers
+{% endblock %}
+
+{% block style %}
+  <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+  <div id="helpers" class="spacing"> 
+    <div class="container">
+      <div class="table-base">
+        <div class="text-center mb-2">
+          <p class="title">Platform Helpers</p>
+        </div>
+        <div class="table-responsive">
+          <table class="table text-nowrap" id="helpers-table">
+            <thead>
+              <tr style="color: #083f30">
+                <th scope="col">No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Contact Details</th>
+                <th scope="col">Zone / Circle</th>
+                <th scope="col">Role</th>
+                <th scope="col">Date Added</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for helper in helpers %}
+              <tr class="add">               
+                  <th scope="row">{{ helper.id }}</th>
+                  <td>{{ helper.name }}</td>
+                  <td>{{ helper.phone }}<br>{{ helper.email }}</td>
+                  <td>{{ helper.zone }} / {{ helper.circle }}</td>
+                  <td>{{ helper.role }}</td>
+                  <td>{{ helper.timestamp.strftime('%B %d, %Y') }}</td>
+                  {% if helper.role == "Admin" %}
+                    <td><a href="#!" class="del2" tabindex="-1" role="button" aria-disabled="true">Delete Helper</a></td>
+                  {% else %}
+                    <td><a href="/helper/delete/{{ helper.name }}" class="del" role="button">Delete Helper</a></td>
+                  {% endif %}                               
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-lg-6 mx-auto mt-4">
+          <a class="btn btn-user btn-lg btn-block my-2" href="{{ url_for('new_helper') }}" role="button">
+            Add New Helper
+          </a>
+          <a class="btn btn-records btn-lg btn-block my-3" href="{{ url_for('temp_records') }}" role="button">
+            Temporary Account Records 
+          </a>
+        </div>
+      </div>
+    </div>  
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+{% endblock %}

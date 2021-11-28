@@ -46,8 +46,8 @@
                     {% endwith %}
                     <div>
                         <p>
-                            {{ form.username(class="form-control", placeholder="Username") }}
-                            {% for error in form.username.errors %}
+                            {{ form.email(class="form-control", placeholder="Email") }}
+                            {% for error in form.email.errors %}
                                 <span style="color: orangered; font-size: 13px;">{{ error }}</span>
                             {% endfor %}
                         </p>

@@ -1,35 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <title>Stencil App | Login</title>
+    <!-- <meta
+      name="description"
+      content="We link parents and their wards with premium boarding institutions around the world. This is done in a stress-free and pocket-friendly manner. Come partner with us today."
+    /> -->
+    <!-- <meta
+      name="keywords"
+      content="Boarding Schools, Educational Consultancy, Admission Processing, Visa Application"
+    /> -->
+    <title>{% block title %}{% endblock %}</title>
 
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon 2.png') }}" type="image/x-icon" />
-    <!-- Font Awesome -->
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='images/favicon 2.png') }}"
+      type="image/x-icon"
+    />
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
-    <!-- Google Fonts -->
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <!-- MDB -->
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;200;700&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet" />
 
+    {% block style %}{% endblock %}
     <!-- Custom styles -->
-    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
-</head>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"/>
+  </head>
 
-<body>
+  <body>
+    <div class="sidenav" id="sidenav">
+      <!-- Toggle button -->
+      <div class="group d-block d-xl-none" id="group" onclick="myFunction(this)">
+        <div class="bar1" id="b"></div>
+        <div class="bar2"></div>
+        <div class="bar3" id="b2"></div>
+      </div>
+      <div class="nav" id="nav">
+        <div class="header-section">
+          <span class="material-icons md-50 mb-0">
+            account_circle
+          </span>
+          <p class="mb-0" style="color: #303030; line-height: 1.1;">{{ current_user.name }}</p>
+          <p style="color: #808080;" class="mb-2"><small>{{ current_user.role }}</small></p>
+          <hr class="m-0">
+        </div>
+        <div id="nc-wrap" class="nc-wrap">
+          <ul id="menu">
+            {% if current_user.role == "Zonal Officer" %}
+                        
+            {% else %}
+              <li>
+                <a href="{{ url_for('dashboard') }}" class="nav-link {{'active' if request.path == '/dashboard' }}">
+                  <span class="material-icons"> dashboard </span>
+                  <span class="mi">Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('helpers') }}" class="nav-link {{'active' if request.path == '/helpers' }}">
+                  <span class="material-icons"> people </span>
+                  <span class="mi">Helpers</span>
+                </a>
+              </li>
+              <li>
+                <a href="#history" class="nav-link {{'active' if request.path == '/reports' }}">
+                  <span class="material-icons"> description </span>
+                  <span class="mi">Reports</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('records') }}" class="nav-link {{'active' if request.path == '/records' }}">
+                  <span class="material-icons"> folder </span>
+                  <span class="mi">Records</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('resources') }}" class="nav-link {{'active' if request.path == '/resources' }}">
+                  <span class="material-icons"> movie </span>
+                  <span class="mi">Resources</span>
+                </a>
+              </li>
+              <li>
+                <a href="#history" class="nav-link {{'active' if request.path == '/settings' }}">
+                  <span class="material-icons"> settings </span>
+                  <span class="mi">Account</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('logout') }}" class="nav-link">
+                  <span class="material-icons"> logout </span>
+                  <span class="mi">Logout</span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+              
+    <main id="page" class="container-fluid">
+      {% block body %}{% endblock %}
+    </main>    
+    <footer class="py-3 text-center">
+      <p class="mb-0">
+        &copy; GMN - Tombstone Committee
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+      </p>
+    </footer>
     
-
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
+    
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
     <!-- Custom scripts -->
-</body>
-
+    <script type="text/javascript" src="{{ url_for('static', filename = 'js/main.js') }}"></script>
+    {% block script %} {% endblock %}
+  </body>
 </html>
