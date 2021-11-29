@@ -1,0 +1,100 @@
+{% extends "base.html" %} {% block title %} Stencil Application | New Helper {%
+endblock %} {% block body %}
+<div id="new-helper" class="spacing">
+  <div class="container">
+    <div class="col-lg-10 col-xl-8 mx-auto">
+      <div class="table-base">
+        <div class="text-center mb-0">
+          <p class="title mb-0">New Record</p>
+        </div>
+        <form action="" method="POST" novalidate>
+          {{ form.hidden_tag() }} {% with messages =
+          get_flashed_messages(with_categories=true) %} {% if messages %} {% for
+          category, message in messages %}
+          <div class="alert alert-{{ category }} text-center text-bold mb-0">
+            {{ message }}
+          </div>
+          {% endfor %} {% endif %} {% endwith %}
+          <div class="row pt-2">
+            <div class="col-12 mt-4">
+              <div>
+                {{ form.name(class="form-control", placeholder="Full Name") }}
+                {% for error in form.name.errors %}
+                <span style="color: orangered; font-size: 13px"
+                  >{{ error }}</span
+                >
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-md-6 mt-3">
+              <div>
+                {{ form.circle.label(class="form-label mb-0") }} {{
+                form.circle(class="form-control form-select",
+                placeholder="Circle") }} {% for error in form.circle.errors %}
+                <span style="color: orangered; font-size: 13px"
+                  >{{ error }}</span
+                >
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div>
+                {{ form.zone.label(class="form-label mb-0") }} {{
+                form.zone(class="form-control form-select") }} {% for error in
+                form.zone.errors %}
+                <span style="color: orangered; font-size: 13px"
+                  >{{ error }}</span
+                >
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div>
+                {{ form.dob(class="form-control", placeholder="Birdth Date") }}
+                {% for error in form.dob.errors %}
+                <span style="color: orangered; font-size: 13px"
+                  >{{ error }}</span
+                >
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div>
+                {{ form.dod(class="form-control", placeholder="Departure Date")
+                }} {% for error in form.dod.errors %}
+                <span style="color: orangered; font-size: 13px"
+                  >{{ error }}</span
+                >
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div>
+                {{ form.yop(class="form-control", placeholder="Tombstone
+                Procurement Year") }} {% for error in form.yop.errors %}
+                <span style="color: orangered; font-size: 13px"
+                  >{{ error }}</span
+                >
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div>
+                {{ form.cemetry(class="form-control", placeholder="Cemetry
+                Address") }} {% for error in form.cemetry.errors %}
+                <span style="color: orangered; font-size: 13px"
+                  >{{ error }}</span
+                >
+                {% endfor %}
+              </div>
+            </div>
+            <div class="px-2 col-12 my-3">
+              {{ form.submit(class="btn btn-user btn-lg btn-block my-2") }}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

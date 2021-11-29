@@ -1,3 +1,5 @@
+from enum import unique
+from operator import index
 from app import db, login
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -10,7 +12,7 @@ def load_user(id):
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), index=True, nullable=False, unique=True)
+    name = db.Column(db.String(50), index=True, nullable=False, unique=False)
     email = db.Column(db.String(100), index=True, nullable=False, unique=True)
     phone = db.Column(db.String(14), index=True, nullable=False, unique=True)
     role = db.Column(db.String(20), index=True, nullable=False, unique=False)
@@ -29,19 +31,6 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
     
-
-class TemporaryPasswords(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), index=True, nullable=False, unique=True)
-    email = db.Column(db.String(100), index=True, nullable=False, unique=True)
-    temp_password = db.Column(db.String(128), nullable=False)
-    role = db.Column(db.String(20), index=True, nullable=False, unique=False)
-    circle = db.Column(db.String(50), index=True, nullable=False, unique=False)
-    zone = db.Column(db.String(20), index=True, nullable=False, unique=False)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-
-    def __repr__(self):
-        return f'<Name: {self.name}, {self.temp_password}>'
 
 
 class Resource(db.Model):
@@ -69,23 +58,18 @@ class Circle(db.Model):
 
 class Record(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), index=True, nullable=False, unique=True)
+    name = db.Column(db.String(50), index=True, nullable=False, unique=False)
     circle = db.Column(db.String(50), index=True, nullable=False, unique=False)
     zone = db.Column(db.String(20), index=True, nullable=False, unique=False)
     dob = db.Column(db.String(24), index=True, nullable=False, unique=False)
     dod = db.Column(db.String(24), index=True, nullable=False, unique=False)
-    yop = db.Column(db.String(4), index=True, nullable=False, unique=False)
-    cemetry = db.Column(db.String(250), index=True, nullable=False, unique=False)
+    stencil = db.Column(db.Text, index=True, nullable=False, unique=True)
+    stencilPath = db.Column(db.String(256), index=True, nullable=False, unique=True)
+    yop = db.Column(db.String(4), index=True, nullable=True, unique=False)
+    cemetry = db.Column(db.String(250), index=True, nullable=True, unique=False)
+    status = db.Column(db.String(250), index=True, nullable=False, unique=False, default="Processing")
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
         return f'<Record: {self.name}, {self.dod}>'
   
-
-class Recent(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __repr__(self):
-        return '<Post {}>'.format(self.id)

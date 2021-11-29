@@ -2,9 +2,9 @@ import os, secrets
 
 from flask import render_template, redirect, url_for, flash, request
 from app import app, db
-from app.forms import LoginForm, NewHelperForm
+from app.forms import LoginForm, NewHelperForm, NewRecordForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import Resource, User, Circle, TemporaryPasswords, Record
+from app.models import Resource, User, Circle, Record
 from werkzeug.urls import url_parse
 
 
@@ -67,11 +67,9 @@ def new_helper():
                 password = password + secrets.choice(character_base)
             
             # Add new entries to the User and TemporaryPasswords tables.
-            new_entry = TemporaryPasswords(name=name, email=email, role=role, circle=circle, zone=zone, temp_password=password)
             new_helper = User(name=name, email=email, phone=phone, role=role, circle=circle, zone=zone)
             new_helper.set_password(password)
             db.session.add(new_helper)
-            db.session.add(new_entry)
             db.session.commit() 
             flash(
                 f"New helper Mr. {name} was last added to the platform.",
@@ -98,12 +96,6 @@ def delete_helper(name):
     return redirect(url_for('helpers'))
 
 
-@login_required
-@app.route('/helpers/temp-records')
-def temp_records():
-    accounts = TemporaryPasswords.query.all()
-    return render_template('login-details.html', accounts=accounts)
-
 
 @login_required
 @app.route('/resources')
@@ -117,4 +109,35 @@ def resources():
 def records():
     records = Record.query.all()
     return render_template('records.html', records=records)
+
+
+@login_required
+@app.route('/record/new', methods=['GET', 'POST'])
+def new_record():
+    form = NewRecordForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            name = form.name.data
+            circle = form.circle.data
+            zone = form.zone.data                  
+            dob = form.dob.data
+            dod = form.dod.data
+            yop = form.data.yop
+            cemetry = form.cemetry.data
+            
+            # Generate stencil and stencil path
+            
+            # Add new entries to the Record table.
+            new_record = User(name=name, circle=circle, zone=zone, dob=dob, dod=dod, yop=yop, cemetry=cemetry, stencil='', stencilPath='')
+            
+            db.session.add(new_record)
+            db.session.commit() 
+            flash(
+                f"New tombstone record < {name} > was added to the platform.",
+                category="success",
+            )
+            return redirect(request.url)
+        else:
+            return render_template('new-record.html', form=form)
+    return render_template('new-record.html', form=form)
     

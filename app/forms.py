@@ -1,7 +1,7 @@
 import secrets, string
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, SelectField, DateField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError, Email
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from app.models import User, Circle
@@ -19,14 +19,7 @@ class NewHelperForm(FlaskForm):
 
     def get_pk(obj):
         return obj
-    
-    def validate_name(self, name):
-        name_dup = User.query.filter_by(name=name.data).first()
-        if name_dup:
-            raise ValidationError(
-                "Name already exists! Please check the Helpers Menu before proceeding."
-            )
-    
+        
     def validate_email(self, email):
         email_dup = User.query.filter_by(email=email.data).first()
         if email_dup:
@@ -51,6 +44,25 @@ class NewHelperForm(FlaskForm):
     zone = SelectField("Select Zone", [DataRequired()],
         choices=[("", "Zone"), ("South W.", "South West"), ("North C.", "North Central"), ("South E.", "South East")
         ],)
+    submit = SubmitField("Submit")
+    
+
+class NewRecordForm(FlaskForm):
+    def query_factory():
+        return [r.name for r in Circle.query.all()]
+
+    def get_pk(obj):
+        return obj
+    
+    name = StringField(label="Full Name", validators=[DataRequired()])
+    circle = QuerySelectField(label=u"Select Circle", validators=[DataRequired()], query_factory=query_factory, get_pk=get_pk)
+    zone = SelectField("Select Zone", [DataRequired()],
+        choices=[("", ""), ("South W.", "South West"), ("North C.", "North Central"), ("South E.", "South East")
+        ],)
+    dob = DateField("Birth Date", [DataRequired()])
+    dod = DateField("Departure Date", [DataRequired()])
+    yop = DateField("Year of Tombstone Procurement / Facelift", [DataRequired()])
+    cemetry = TextAreaField("Cemetry Address", validators=[DataRequired()])
     submit = SubmitField("Submit")    
 
 
