@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Tombstone Records | New Helper
+Tombstone Records | Edit Helper
 {% endblock %}
 
 
@@ -11,32 +11,25 @@ Tombstone Records | New Helper
       <div class="col-lg-10 col-xl-8 mx-auto">
         <div class="table-base">
           <div class="text-center mb-0">
-            <p class="title mb-0">New Helper</p>
+            <p class="title mb-0">Edit Helper</p>
           </div>
-          <form action="" id="helper-form" method="POST" novalidate>
+          <form action="" method="POST" novalidate>
             {{ form.hidden_tag() }}
         
             {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-            {% for category, message in messages %}
-            <div class="alert alert-{{ category }} text-center text-bold mb-0">
-              {{ message }}
-            </div>
-            {% endfor %}
-            {% endif %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} text-center text-bold mb-0">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
             {% endwith %}
             <div class="row pt-2">
-              <div class="col-12 mt-4">
-                <div>
-                  {{ form.name(class="form-control", placeholder="Full Name", id="name") }}
-                  {% for error in form.name.errors %}
-                  <span style="color: orangered; font-size: 13px;">{{ error }}</span>
-                  {% endfor %}
-                </div>
-              </div>
               <div class="col-md-6 mt-4">
                 <div>
-                  {{ form.email(class="form-control", placeholder="Email Address", id="email") }}
+                   {{ form.email.label(class="form-label mb-0") }}
+                  {{ form.email(class="form-control", placeholder="Email Address") }}
                   {% for error in form.email.errors %}
                   <span style="color: orangered; font-size: 13px;">{{ error }}</span>
                   {% endfor %}
@@ -44,38 +37,41 @@ Tombstone Records | New Helper
               </div>
               <div class="col-md-6 mt-4">
                 <div>
-                  {{ form.phone(class="form-control", placeholder="Phone Number", id="phone") }}
+                  {{ form.phone.label(class="form-label mb-0") }}
+                  {{ form.phone(class="form-control", placeholder="Phone Number") }}
                   {% for error in form.phone.errors %}
                   <span style="color: orangered; font-size: 13px;">{{ error }}</span>
                   {% endfor %}
                 </div>
               </div>
-              <div class="col-md-12 mt-3">
+              <div class="col-md-6 mt-3">
                 <div>
                   {{ form.circle.label(class="form-label mb-0") }}
-                  {{ form.circle(class="form-control form-select", placeholder="Circle", id="circle") }}
+                  {{ form.circle(class="form-control form-select", placeholder="Circle") }}
                   {% for error in form.circle.errors %}
                   <span style="color: orangered; font-size: 13px;">{{ error }}</span>
                   {% endfor %}
                 </div>
-              </div>
-              <div class="col-md-6 mt-4">
-                <div>                  
-                  {{ form.role(class="form-control form-select", id="role") }}
-                  {% for error in form.role.errors %}
-                  <span style="color: orangered; font-size: 13px;">{{ error }}</span>
-                  {% endfor %}                  
-                </div>
-              </div>              
-              <div class="col-md-6 mt-4">
+              </div>            
+              <div class="col-md-6 mt-3">
                 <div>
-                  {{ form.zone(class="form-control form-select", id="zone") }}
+                  {{ form.zone.label(class="form-label mb-0") }}
+                  {{ form.zone(class="form-control form-select") }}
                   {% for error in form.zone.errors %}
                   <span style="color: orangered; font-size: 13px;">{{ error }}</span>
                   {% endfor %}
                 </div>
               </div>
-              <div class="px-2 col-12 my-3">
+              <div class="col-md-6 mt-3">
+                <div>
+                  {{ form.role.label(class="form-label mb-0") }}                
+                  {{ form.role(class="form-control form-select") }}
+                  {% for error in form.role.errors %}
+                  <span style="color: orangered; font-size: 13px;">{{ error }}</span>
+                  {% endfor %}                  
+                </div>
+              </div>  
+              <div class="px-2 col-12 my-4">
                 {{ form.submit(class="btn btn-records btn-lg btn-block my-2") }}
               </div>
             </div>

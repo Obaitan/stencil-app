@@ -1,0 +1,93 @@
+{% extends "base.html" %} 
+
+{% block title %} 
+Tombstone Records | Account
+{% endblock %}  
+
+{% block body %}
+<div id="account" class="spacing">
+  <div class="container">    
+      <div class="row mb-5">
+        <div class="col-lg-4 col-xl-5 py-3 px-4">
+          <div class="table-base">
+            <div>
+              <p class="title">Account Information</p>
+            </div>
+            <div class="mt-1">
+              <span class="caption">Phone Number:</span>
+              <span class="text">{{ current_user.phone }}</span>
+            </div>
+            <div class="mt-1">
+              <span class="caption">Email Address:</span>
+              <span class="text">{{ current_user.email }}</span>
+            </div>
+            <div class="mt-1">
+              <span class="caption">Circle:</span>
+              <span class="text">{{ current_user.circle }}</span>
+            </div>
+            <div class="mt-1">
+              <span class="caption">Zone:</span>
+              <span class="text">{{ current_user.zone }}</span>
+            </div>
+            <div class="col-lg-6 mt-3">
+              <a class="btn btn-user btn-lg btn-block my-2" href="{{ url_for('contact_admin') }}" role="button">
+                Contact Admin
+              </a>
+            </div>
+          </div>          
+        </div>
+        <div class="col-lg-7 py-3 px-4">
+          <div class="table-base">
+            <div>
+              <p class="title">Reset Password</p>
+              <p class="anno">
+                Please note that the password should be a minimum of 16 characters and be a combination of upper and lower case characters, numbers and other special characters.
+              </p>
+            </div>
+            <div>
+              <form action="" method="POST" novalidate>
+                {{ form.hidden_tag() }}
+            
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} text-center text-bold mb-0">
+                  {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <div class="pt-2">
+                  <div class="col-md-7">
+                    <div>
+                      {{ form.password(class="form-control", placeholder="New Password") }}
+                      {% for error in form.password.errors %}
+                      <span style="color: orangered; font-size: 13px;">{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="col-md-7 mt-3">
+                    <div>
+                      {{ form.password2(class="form-control", placeholder="Repeat Password") }}
+                      {% for error in form.password2.errors %}
+                      <span style="color: orangered; font-size: 13px;">{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                  </div>               
+                  <div class="col-md-7 my-3">
+                    {{ form.submit(class="btn btn-user btn-lg btn-block") }}
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-lg-6 pl-xl-5 mt-3">
+          <div class="table-base">
+            <p class="title">Notification Settings</p>
+          </div>
+      </div> -->      
+    </div>
+  </div>
+</div>
+{% endblock %} 

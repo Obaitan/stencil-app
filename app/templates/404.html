@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div id="backdrop">
+        <div class="db row align-items-center">
+            <div class="text-center w-100">
+                <p class="error-bold mb-3">Error<br />404</p>
+                <p class="error-text1">
+                    This page is unavailable.<br />The URL might be broken or wrong.
+                </p>
+                <div class="">
+                    <a class="btn btn-user ml-0" href="{{ url_for('dashboard') }}" role="button">Go To Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

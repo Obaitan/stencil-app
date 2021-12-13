@@ -12,7 +12,7 @@ def load_user(id):
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), index=True, nullable=False, unique=False)
+    name = db.Column(db.String(50), index=True, nullable=False, unique=True)
     email = db.Column(db.String(100), index=True, nullable=False, unique=True)
     phone = db.Column(db.String(14), index=True, nullable=False, unique=True)
     role = db.Column(db.String(20), index=True, nullable=False, unique=False)
@@ -35,13 +35,13 @@ class User(UserMixin, db.Model):
 
 class Resource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), index=True, nullable=False, unique=True)
-    type = db.Column(db.String(20), index=True, nullable=False, unique=False)
+    title = db.Column(db.Text, index=True, nullable=False, unique=True)
+    file_type = db.Column(db.String(20), index=True, nullable=False, unique=False)
     link = db.Column(db.String(200), index=True, nullable=False, unique=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return f'<title: {self.title}, {self.type}>'
+        return f'<title: {self.title}, {self.file_type}>'
 
 
 
@@ -56,20 +56,64 @@ class Circle(db.Model):
         return f'<Circle: {self.name}>'
 
 
-class Record(UserMixin, db.Model):
+class Record(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), index=True, nullable=False, unique=False)
     circle = db.Column(db.String(50), index=True, nullable=False, unique=False)
     zone = db.Column(db.String(20), index=True, nullable=False, unique=False)
-    dob = db.Column(db.String(24), index=True, nullable=False, unique=False)
-    dod = db.Column(db.String(24), index=True, nullable=False, unique=False)
-    stencil = db.Column(db.Text, index=True, nullable=False, unique=True)
-    stencilPath = db.Column(db.String(256), index=True, nullable=False, unique=True)
-    yop = db.Column(db.String(4), index=True, nullable=True, unique=False)
+    dob = db.Column(db.DateTime, index=True, nullable=False, unique=False)
+    dod = db.Column(db.DateTime, index=True, nullable=False, unique=False)
+    yop = db.Column(db.DateTime, index=True, nullable=True, unique=False)
     cemetry = db.Column(db.String(250), index=True, nullable=True, unique=False)
     status = db.Column(db.String(250), index=True, nullable=False, unique=False, default="Processing")
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
         return f'<Record: {self.name}, {self.dod}>'
+
+
+class LoginRecord(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), index=True, nullable=False, unique=False)
+    role = db.Column(db.String(20), index=True, nullable=False, unique=False)
+    zone = db.Column(db.String(20), index=True, nullable=False, unique=False)
+    status = db.Column(db.String(7), index=True, nullable=False, unique=False)
+    last_seen = db.Column(db.DateTime, index=True, nullable=False, unique=False)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<User: {self.name}, {self.role}>'
   
+  
+class Stencil(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50), index=True, nullable=False, unique=True)
+    date = db.Column(db.DateTime, index=True, nullable=False, unique=False)
+    file = db.Column(db.LargeBinary, nullable=False)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<Stencil: {self.title}>'
+
+
+class Character(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(12), index=True, nullable=False, unique=True)
+    data = db.Column(db.LargeBinary, nullable=False)
+    width = db.Column(db.String(2), index=True, nullable=False, unique=False)
+    height = db.Column(db.String(2), index=True, nullable=False, unique=False)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    
+    def __repr__(self):
+        return f'<Character: {self.name}>'
+
+
+class Report(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(30), index=True, nullable=False, unique=True)
+    date = db.Column(db.DateTime, index=True, nullable=False, unique=False)
+    file = db.Column(db.LargeBinary, nullable=False)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    
+    def __repr__(self):
+        return f'<Report: {self.title}>'

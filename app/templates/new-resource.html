@@ -1,0 +1,59 @@
+{% extends "base.html" %} 
+
+{% block title %} 
+Tombstone Records | New Resource 
+{% endblock %} 
+
+{% block body %}
+<div id="new-helper" class="spacing">
+  <div class="container">
+    <div class="col-lg-10 col-xl-8 mx-auto">
+      <div class="table-base">
+        <div class="text-center mb-0">
+          <p class="title mb-0">New Resource</p>
+        </div>
+        <div class="px-md-4">
+          <form id="resource-form" action="" method="POST" novalidate>
+            {{ form.hidden_tag() }} {% with messages =
+            get_flashed_messages(with_categories=true) %} {% if messages %} {% for
+            category, message in messages %}
+            <div class="alert alert-{{ category }} text-center text-bold mb-0">
+              {{ message }}
+            </div>
+            {% endfor %} {% endif %} {% endwith %}
+            <div class="row pt-2">
+              <div class="col-12 mt-3">
+                <div>
+                  {{ form.title(class="form-control", id="title", placeholder="File Name") }} 
+                  {% for error in form.title.errors %}
+                  <span style="color: orangered; font-size: 13px">{{ error }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="col-12 mt-3">
+                <div>
+                  {{ form.file_type(class="form-control form-select", id="file_type") }} 
+                  {% for error in form.file_type.errors %}
+                  <span style="color: orangered; font-size: 13px">{{ error }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="col-12 mt-3">
+                <div>
+                  {{ form.link(class="form-control", id="link", placeholder="File Link") }} 
+                  {% for error in form.link.errors %}
+                  <span style="color: orangered; font-size: 13px">{{ error }}</span>
+                  {% endfor %}
+                </div>
+              </div>       
+              <div class="col-12 my-4">
+                {{ form.submit(class="btn btn-records btn-lg btn-block") }}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

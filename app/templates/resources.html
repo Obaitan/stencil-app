@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Stencil Application | Resources
+Tombstone Records | Resources
 {% endblock %}
 
 {% block style %}
@@ -11,37 +11,35 @@ Stencil Application | Resources
 {% block body %}
   <div id="resources" class="spacing"> 
     <div class="container">
-      <div class="text-center mt-4 mb-2">
+      <div class="mb-2">
         <p class="title">Video Resources</p>
       </div>      
-      <div class="row justify-content-center">
-      {% for resource in resources %}
-        {% if resource.type == "Video File" %}
-        <div class="col-md-6 col-lg-4 p-3">
-          <div class="vid-base p-0">
-            <a href="{{ resource.link }}" data-lity role="link" class="w-100"></a>
-            <p class="px-4 pt-3 pb-4">{{ resource.title }}</p>           
-          </div>          
-        </div>
-        {% endif %}
+      <div class="row mb-3">
+      {% for video in videos %}
+          <div class="col-md-4 col-lg-3 p-3">
+            <div class="vid-base text-center">
+               <a href="{{ video.link }}" data-lity role="link">
+                 <img src="{{ url_for('static', filename='images/thumbnail.jpg') }}" class="w-100" alt="Video thumbnail">
+               </a>
+               <p class="video-caption px-3 py-2">{{ video.title }}</p> 
+            </div>          
+          </div>               
       {% endfor %}
       </div>
 
-      <div class="text-center mt-5">
-        <p class="title">Documents</p>
+      <div class="mt-5">
+        <p class="title">PDF Files</p>
       </div>
-      <div class="row justify-content-center">
-        {% for resource in resources %}
-          {% if resource.type == "PDF File" %}
-          <div class="col-md-3 col-xl-2 p-4">
+      <div class="row mt-4">
+        {% for pdf in pdfs %}          
+          <div class="col-md-3 col-xl-2 p-3 p-xl-1">
             <div class="text-center">
-              <a href="{{ resource.link }}" role="link">
-                <span class="material-icons md-50"> description </span>
+              <a href="{{ pdf.link }}" target="_blank" role="link">
+                <img src="{{ url_for('static', filename='images/svg/pdf-icon.svg') }}" width="80" alt="Pdf icon">
               </a>
-              <p class="px-4 pt-3 pb-4">{{ resource.title }}</p>
+              <p class="video-caption px-4 pt-3">{{ pdf.title }}</p>
             </div>
-          </div>
-          {% endif %}
+          </div>          
         {% endfor %}
       </div>
     </div>  

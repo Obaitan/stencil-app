@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="66.765312"
+   height="132.28346"
+   id="svg3206"
+   viewBox="0 0 66.765308 132.28346"
+   sodipodi:docname="E.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata3212">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3210" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="838"
+     id="namedview3208"
+     showgrid="false"
+     showguides="true"
+     inkscape:zoom="2.4152679"
+     inkscape:cx="-37.20993"
+     inkscape:cy="66.141731"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3206"
+     inkscape:measure-start="1115.17,301.786"
+     inkscape:measure-end="1114.69,275.584"
+     inkscape:guide-bbox="true" />
+  <g
+     aria-label="8"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:155.11968994px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:none;fill-opacity:1;stroke:#0097ff;stroke-width:1.28181183;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="text998"
+     transform="matrix(1.0589545,0,0,1,-595.28864,-22.44673)" />
+  <g
+     aria-label="P"
+     transform="matrix(0.9315906,0,0,1.0734329,-442.72048,-23.999921)"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:172.15777588px;line-height:1.25;font-family:'Arial Narrow Special G1';-inkscape-font-specification:'Arial Narrow Special G1';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:12.91183376"
+     id="text1321" />
+  <g
+     id="Layer1047"
+     transform="matrix(1.3200293,0,0,1.3200293,-530.40454,-265.32272)">
+    <path
+       d="m 402.3126,201.4975 v 99.2007 z"
+       style="fill:none;stroke:#000200;stroke-width:0.99980003;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none"
+       id="path3043"
+       inkscape:connector-curvature="0" />
+    <path
+       d="m 402.3126,201.4975 49.4981,0.007 -0.0541,20.6464 c 0.0541,14.90706 0.0528,29.13147 0.0541,38.0186 h -31.32561 v 18.6862 h 31.2918 l 0.112,21.8544 -49.5765,-0.0117"
+       style="fill:none;stroke:#000200;stroke-width:0.99980003;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none"
+       id="path3045"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccc" />
+  </g>
+  <text
+     x="80.747047"
+     y="662.06628"
+     id="text3176" />
+  <g
+     aria-label="8"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:155.11968994px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:none;fill-opacity:1;stroke:#0097ff;stroke-width:1.28181183;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="text998-7"
+     transform="matrix(1.0589545,0,0,1,-591.6914,616.61928)" />
+  <g
+     aria-label="P"
+     transform="matrix(0.9315906,0,0,1.0734329,-439.12325,615.06609)"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:172.15777588px;line-height:1.25;font-family:'Arial Narrow Special G1';-inkscape-font-specification:'Arial Narrow Special G1';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:12.91183376"
+     id="text1321-9" />
+  <text
+     x="84.344276"
+     y="1301.1324"
+     id="text3176-1" />
+</svg>

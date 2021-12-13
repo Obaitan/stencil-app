@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="104.87598"
+   height="132.28374"
+   id="svg3206"
+   viewBox="0 0 104.87598 132.28374"
+   sodipodi:docname="M.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata3212">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3210" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="838"
+     id="namedview3208"
+     showgrid="false"
+     showguides="true"
+     inkscape:zoom="0.80488811"
+     inkscape:cx="-469.74388"
+     inkscape:cy="-159.58873"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3206"
+     inkscape:measure-start="1115.17,301.786"
+     inkscape:measure-end="1114.69,275.584"
+     inkscape:guide-bbox="true" />
+  <g
+     aria-label="8"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:155.11968994px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:none;fill-opacity:1;stroke:#0097ff;stroke-width:1.28181183;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="text998"
+     transform="matrix(1.0589545,0,0,1,-1326.7578,-22.446531)" />
+  <g
+     aria-label="P"
+     transform="matrix(0.9315906,0,0,1.0734329,-1174.1896,-23.999722)"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:172.15777588px;line-height:1.25;font-family:'Arial Narrow Special G1';-inkscape-font-specification:'Arial Narrow Special G1';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:12.91183376"
+     id="text1321" />
+  <path
+     d="M 0.69387996,0.69387996 V 131.58986 H 24.80918 l -0.014,-37.314672 h 9.8278 l 8.3177,37.314672 h 19.6689 l 7.7543,-37.314672 c 5.2122,0 4.9619,0 8.7604,0 l -0.01,37.314672 h 25.0256 l 0.042,-130.89598004 c -82.4705,0 -33.7524,1.09560604 -103.49400004,0 z"
+     style="fill:none;stroke:#000200;stroke-width:1.38775992;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none"
+     id="path3079"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cccccccccccccc" />
+  <text
+     x="-650.72211"
+     y="662.06653"
+     id="text3176" />
+  <g
+     aria-label="8"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:155.11968994px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:none;fill-opacity:1;stroke:#0097ff;stroke-width:1.28181183;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="text998-7"
+     transform="matrix(1.0589545,0,0,1,-1323.1605,616.61948)" />
+  <g
+     aria-label="P"
+     transform="matrix(0.9315906,0,0,1.0734329,-1170.5924,615.06629)"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:172.15777588px;line-height:1.25;font-family:'Arial Narrow Special G1';-inkscape-font-specification:'Arial Narrow Special G1';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:12.91183376"
+     id="text1321-9" />
+  <text
+     x="-647.12488"
+     y="1301.1326"
+     id="text3176-1" />
+</svg>

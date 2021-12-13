@@ -34,3 +34,47 @@ function myFunction(x) {
     e.style.width = "180px";
   }
 }
+
+// For new resource form
+$(document).on('submit','#resource-form', function(e) {
+  e.preventDefault();
+  $.ajax({
+    type:'POST',
+    url:'/resources/new',
+    data:{
+      title: $("#title").val(),
+      file_type: $("#file_type").val(),
+      link: $("#link").val()
+    },
+    success:function()
+    {
+      alert('New resource added successfully!');
+    }
+  })
+});
+
+// For new helper form
+$(document).on('submit','#helper-form', function(e) {
+  e.preventDefault();
+  $.ajax({
+    type:'POST',
+    url:'/helpers/new',
+    data:{
+      name: $("#name").val(),
+      email: $("#email").val(),
+      phone: $("#phone").val(),
+      role: $("#role").val(),
+      circle: $("#circle").val(),
+      zone: $("#zone").val()
+    },
+    success:function()
+    {
+      alert('New resource added successfully!');
+    }
+  })
+});
+
+
+
+
+

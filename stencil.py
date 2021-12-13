@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import Resource, User, Circle, Record
+from app.models import Character, Resource, User, Circle, Record
 
 if __name__ == "__main__":
     app.run(debug=True)
@@ -8,5 +8,5 @@ if __name__ == "__main__":
 @app.shell_context_processor
 def make_shell_context():
     return {
-        'db': db, 'User': User, 'Circle': Circle, 'Resource': Resource, 'Record': Record
+        'db': db, 'User': User, 'Circle': Circle, 'Resource': Resource, 'Record': Record, 'Character': Character
     }
