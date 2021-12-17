@@ -176,7 +176,21 @@ class NewRecordForm(FlaskForm):
     dod = DateField("Departure Date", [DataRequired()])
     yop = DateField("Year of Tombstone Procurement", [DataRequired()])
     cemetry = TextField("Cemetry Address", validators=[DataRequired()])
-    submit = SubmitField("Add Record")    
+    submit = SubmitField("Add Record")
+
+
+class NewCircleForm(FlaskForm):
+    
+    def validate_name(self, name):
+        name_dup = Circle.query.filter_by(name=name.data).first()
+        if name_dup:
+            raise ValidationError(
+                "Circle names must be unique! This name already exists."
+            )
+    
+    name = StringField(label="Circle Name", validators=[DataRequired()])
+    state = StringField(label="State", validators=[DataRequired()]) 
+    submit = SubmitField("Add Circle") 
 
 
 class ResetPasswordForm(FlaskForm):        

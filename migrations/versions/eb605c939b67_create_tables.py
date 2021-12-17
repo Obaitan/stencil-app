@@ -1,8 +1,8 @@
 """Create tables
 
-Revision ID: 25c4b4186cb7
+Revision ID: eb605c939b67
 Revises: 
-Create Date: 2021-12-07 02:03:01.804622
+Create Date: 2021-12-17 15:04:00.570579
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '25c4b4186cb7'
+revision = 'eb605c939b67'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,10 +24,12 @@ def upgrade():
     sa.Column('data', sa.LargeBinary(), nullable=False),
     sa.Column('width', sa.String(length=2), nullable=False),
     sa.Column('height', sa.String(length=2), nullable=False),
+    sa.Column('timestamp', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_character_height'), 'character', ['height'], unique=False)
     op.create_index(op.f('ix_character_name'), 'character', ['name'], unique=True)
+    op.create_index(op.f('ix_character_timestamp'), 'character', ['timestamp'], unique=False)
     op.create_index(op.f('ix_character_width'), 'character', ['width'], unique=False)
     op.create_table('circle',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -46,27 +48,27 @@ def upgrade():
     sa.Column('zone', sa.String(length=20), nullable=False),
     sa.Column('status', sa.String(length=7), nullable=False),
     sa.Column('last_seen', sa.DateTime(), nullable=False),
-    sa.Column('timestamp', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_login_record_last_seen'), 'login_record', ['last_seen'], unique=False)
     op.create_index(op.f('ix_login_record_name'), 'login_record', ['name'], unique=False)
     op.create_index(op.f('ix_login_record_role'), 'login_record', ['role'], unique=False)
     op.create_index(op.f('ix_login_record_status'), 'login_record', ['status'], unique=False)
-    op.create_index(op.f('ix_login_record_timestamp'), 'login_record', ['timestamp'], unique=False)
     op.create_index(op.f('ix_login_record_zone'), 'login_record', ['zone'], unique=False)
     op.create_table('notification',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('subject', sa.Text(), nullable=False),
+    sa.Column('title', sa.String(length=50), nullable=False),
     sa.Column('message', sa.Text(), nullable=False),
-    sa.Column('status', sa.String(length=6), nullable=False),
+    sa.Column('date', sa.DateTime(), nullable=False),
+    sa.Column('status', sa.String(length=7), nullable=False),
     sa.Column('timestamp', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index(op.f('ix_notification_message'), 'notification', ['message'], unique=False)
+    op.create_index(op.f('ix_notification_date'), 'notification', ['date'], unique=False)
+    op.create_index(op.f('ix_notification_message'), 'notification', ['message'], unique=True)
     op.create_index(op.f('ix_notification_status'), 'notification', ['status'], unique=False)
-    op.create_index(op.f('ix_notification_subject'), 'notification', ['subject'], unique=False)
     op.create_index(op.f('ix_notification_timestamp'), 'notification', ['timestamp'], unique=False)
+    op.create_index(op.f('ix_notification_title'), 'notification', ['title'], unique=False)
     op.create_table('record',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
@@ -89,6 +91,17 @@ def upgrade():
     op.create_index(op.f('ix_record_timestamp'), 'record', ['timestamp'], unique=False)
     op.create_index(op.f('ix_record_yop'), 'record', ['yop'], unique=False)
     op.create_index(op.f('ix_record_zone'), 'record', ['zone'], unique=False)
+    op.create_table('report',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('title', sa.String(length=30), nullable=False),
+    sa.Column('date', sa.DateTime(), nullable=False),
+    sa.Column('file', sa.LargeBinary(), nullable=False),
+    sa.Column('timestamp', sa.DateTime(), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_report_date'), 'report', ['date'], unique=False)
+    op.create_index(op.f('ix_report_timestamp'), 'report', ['timestamp'], unique=False)
+    op.create_index(op.f('ix_report_title'), 'report', ['title'], unique=True)
     op.create_table('resource',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.Text(), nullable=False),
@@ -103,12 +116,13 @@ def upgrade():
     op.create_index(op.f('ix_resource_title'), 'resource', ['title'], unique=True)
     op.create_table('stencil',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.Text(), nullable=False),
-    sa.Column('file_path', sa.String(length=256), nullable=False),
+    sa.Column('title', sa.String(length=50), nullable=False),
+    sa.Column('date', sa.DateTime(), nullable=False),
+    sa.Column('file', sa.LargeBinary(), nullable=False),
     sa.Column('timestamp', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index(op.f('ix_stencil_file_path'), 'stencil', ['file_path'], unique=True)
+    op.create_index(op.f('ix_stencil_date'), 'stencil', ['date'], unique=False)
     op.create_index(op.f('ix_stencil_timestamp'), 'stencil', ['timestamp'], unique=False)
     op.create_index(op.f('ix_stencil_title'), 'stencil', ['title'], unique=True)
     op.create_table('user',
@@ -145,13 +159,17 @@ def downgrade():
     op.drop_table('user')
     op.drop_index(op.f('ix_stencil_title'), table_name='stencil')
     op.drop_index(op.f('ix_stencil_timestamp'), table_name='stencil')
-    op.drop_index(op.f('ix_stencil_file_path'), table_name='stencil')
+    op.drop_index(op.f('ix_stencil_date'), table_name='stencil')
     op.drop_table('stencil')
     op.drop_index(op.f('ix_resource_title'), table_name='resource')
     op.drop_index(op.f('ix_resource_timestamp'), table_name='resource')
     op.drop_index(op.f('ix_resource_link'), table_name='resource')
     op.drop_index(op.f('ix_resource_file_type'), table_name='resource')
     op.drop_table('resource')
+    op.drop_index(op.f('ix_report_title'), table_name='report')
+    op.drop_index(op.f('ix_report_timestamp'), table_name='report')
+    op.drop_index(op.f('ix_report_date'), table_name='report')
+    op.drop_table('report')
     op.drop_index(op.f('ix_record_zone'), table_name='record')
     op.drop_index(op.f('ix_record_yop'), table_name='record')
     op.drop_index(op.f('ix_record_timestamp'), table_name='record')
@@ -162,13 +180,13 @@ def downgrade():
     op.drop_index(op.f('ix_record_circle'), table_name='record')
     op.drop_index(op.f('ix_record_cemetry'), table_name='record')
     op.drop_table('record')
+    op.drop_index(op.f('ix_notification_title'), table_name='notification')
     op.drop_index(op.f('ix_notification_timestamp'), table_name='notification')
-    op.drop_index(op.f('ix_notification_subject'), table_name='notification')
     op.drop_index(op.f('ix_notification_status'), table_name='notification')
     op.drop_index(op.f('ix_notification_message'), table_name='notification')
+    op.drop_index(op.f('ix_notification_date'), table_name='notification')
     op.drop_table('notification')
     op.drop_index(op.f('ix_login_record_zone'), table_name='login_record')
-    op.drop_index(op.f('ix_login_record_timestamp'), table_name='login_record')
     op.drop_index(op.f('ix_login_record_status'), table_name='login_record')
     op.drop_index(op.f('ix_login_record_role'), table_name='login_record')
     op.drop_index(op.f('ix_login_record_name'), table_name='login_record')
@@ -179,6 +197,7 @@ def downgrade():
     op.drop_index(op.f('ix_circle_name'), table_name='circle')
     op.drop_table('circle')
     op.drop_index(op.f('ix_character_width'), table_name='character')
+    op.drop_index(op.f('ix_character_timestamp'), table_name='character')
     op.drop_index(op.f('ix_character_name'), table_name='character')
     op.drop_index(op.f('ix_character_height'), table_name='character')
     op.drop_table('character')

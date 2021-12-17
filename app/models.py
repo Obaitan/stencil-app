@@ -79,7 +79,6 @@ class LoginRecord(db.Model):
     zone = db.Column(db.String(20), index=True, nullable=False, unique=False)
     status = db.Column(db.String(7), index=True, nullable=False, unique=False)
     last_seen = db.Column(db.DateTime, index=True, nullable=False, unique=False)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
         return f'<User: {self.name}, {self.role}>'
@@ -117,3 +116,13 @@ class Report(db.Model):
     
     def __repr__(self):
         return f'<Report: {self.title}>'
+
+
+class Notification(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50), index=True, nullable=False, unique=False)
+    message = db.Column(db.Text, index=True, nullable=False, unique=True)
+    date = db.Column(db.DateTime, index=True, nullable=False, unique=False)
+    status = db.Column(db.String(7), index=True, nullable=False, unique=False, default="Unread")
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    

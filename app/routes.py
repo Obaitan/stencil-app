@@ -3,7 +3,7 @@ import os, random
 from flask import render_template, redirect, url_for, flash, request
 from app import app, db
 from app.forms import (
-    LoginForm, NewHelperForm, NewHelperAdminForm, NewRecordForm, EditHelperForm, ResetPasswordForm, NewResourceForm, ContactAdminForm
+    LoginForm, NewHelperForm, NewHelperAdminForm, NewRecordForm, EditHelperForm, ResetPasswordForm, NewResourceForm, ContactAdminForm, NewCircleForm
 )
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import Resource, User, Record, Circle
@@ -42,7 +42,7 @@ def dashboard():
     helpers = len(User.query.all())
     record_no = len(Record.query.all())
     circles = len(Circle.query.all())
-    recent = Record.query.order_by(Record.id.desc()).limit(7)
+    recent = Record.query.order_by(Record.id.desc()).limit(5)
     pending = Record.query.filter_by(status="Processing").all()
     return render_template('dashboard.html', helpers=helpers, record_no=record_no, circles=circles, recent=recent, pending=pending)
 
@@ -177,6 +177,22 @@ def new_record():
             )
             return redirect(request.url)
     return render_template('new-record.html', form=form)
+
+
+@login_required
+@app.route('/circle/new', methods=['GET', 'POST'])
+def new_circle():
+    if current_user.role == "Zonal Officer":
+        return redirect(url_for('login'))
+    form = NewCircleForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            new_circle = Circle(name=form.name.data, state=form.state.data)
+            db.session.add(new_circle)
+            db.session.commit() 
+            flash("New circle added successfully!", category="success")
+            return redirect(request.url)
+    return render_template('new-circle.html', form=form)
 
 
 @login_required

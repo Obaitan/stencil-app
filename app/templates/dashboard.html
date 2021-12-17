@@ -1,11 +1,10 @@
-{% extends "base.html" %} {% block title %} Tombstone Records | Dashboard {%
-endblock %} {% block style %}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.css"
-/>
-{% endblock %} {% block body %}
+{% extends "base.html" %} 
+
+{% block title %} 
+Tombstone Records | Dashboard 
+{% endblock %} 
+
+{% block body %}
 <div id="dashboard" class="spacing">
   <div class="container">
     <div class="row mb-5">
@@ -41,43 +40,15 @@ endblock %} {% block style %}
           </div>
         </div>
 
-        <div class="row">          
-          <div class="col-lg-7 px-3">
-            <div class="table-base mt-4">
-              <div class="text-center mb-2">
-                <p class="title">Records Summary By Year</p>
-              </div>
-              <div class="d-flex align-items-baseline">
-                <span class="dash-caption">Year 2017</span>
-                <span class="dash-text2 ml-auto">{{ helpers }} Entries</span>
-              </div>
-              <div class="d-flex align-items-baseline">
-                <span class="dash-caption">Year 2018</span>
-                <span class="dash-text2">{{ circles }} Entries</span>
-              </div>
+              
+        <div class="">
+          <div class="table-base mt-4">
+            <div class="text-center mb-2">
+              <p class="title">Records Summary By Year</p>
             </div>
+            <canvas id="myChart"></canvas>
           </div>
-
-          <div class="col-lg-5 px-3">
-            <div class="table-base mt-4">
-              <div class="text-center mb-2">
-                <p class="title">Quick Summary</p>
-              </div>
-              <div class="d-flex align-items-baseline">
-                <span class="dash-caption">Platform Helpers</span>
-                <span class="dash-text">{{ helpers }}</span>
-              </div>
-              <div class="d-flex align-items-baseline">
-                <span class="dash-caption">Circles</span>
-                <span class="dash-text">{{ circles }}</span>
-              </div>
-              <div class="d-flex align-items-baseline">
-                <span class="dash-caption">All Departed Records</span>
-                <span class="dash-text">{{ record_no }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        </div>      
       </div>
 
       <div class="col-lg-4 p-3">
@@ -114,24 +85,67 @@ endblock %} {% block style %}
             </table>
           </div>
         </div>
+
+        <div class="table-base mt-4">
+              <div class="text-center mb-2">
+                <p class="title">Quick Summary</p>
+              </div>
+              <div class="d-flex align-items-baseline">
+                <span class="dash-caption">Platform Helpers</span>
+                <span class="dash-text">{{ helpers }}</span>
+              </div>
+              <div class="d-flex align-items-baseline">
+                <span class="dash-caption">Circles</span>
+                <span class="dash-text">{{ circles }}</span>
+              </div>
+              <div class="d-flex align-items-baseline">
+                <span class="dash-caption">Records</span>
+                <span class="dash-text">{{ record_no }}</span>
+              </div>
+            </div>
       </div>
     </div>
   </div>
 </div>
-{% endblock %} {% block script %}
-<script
-  type="text/javascript"
-  charset="utf8"
-  src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"
-></script>
-<script
-  type="text/javascript"
-  charset="utf8"
-  src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"
-></script>
+{% endblock %} 
+
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js" integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
-  $(document).ready(function () {
-    $("#").DataTable();
-  });
+const ctx = document.getElementById('myChart');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['2017', '2018', '2019', '2020', '2021'],
+        datasets: [{
+            label: 'No. of Records',
+            data: [8, 11, 3, 5, 2],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.4)',
+                'rgba(54, 162, 235, 0.4)',
+                'rgba(255, 206, 86, 0.4)',
+                'rgba(75, 192, 192, 0.4)',
+                'rgba(153, 102, 255, 0.4)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 </script>
 {% endblock %}
